@@ -1,3 +1,4 @@
+#if 0
 #include <iostream>
 using namespace std;
 
@@ -87,5 +88,51 @@ int main()
 {
 	void* p = new char[0xfffffffful];
 	cout << "new:" << p << endl;
+	return 0;
+}
+#endif
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void Fun1(char *arr, int len)
+{
+	for (int i = 0; i < len - 2; i++)
+	{
+		for (int j = 0; j = len - i - 3; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				char tmp;
+				tmp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = tmp;
+			}
+		}
+	}
+}
+
+int main()
+{
+	char arr[] = "dsgcds";
+	printf("%s\n", arr);
+	int num = sizeof(arr) / sizeof(arr[0]);
+	
+	for (int i = 0; i < num - 2; i++)
+	{
+		for (int j = 0; j < num - i - 3; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				char tmp;
+				tmp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = tmp;
+			}
+		}
+	}
+
+	printf("%s\n", arr);
 	return 0;
 }
