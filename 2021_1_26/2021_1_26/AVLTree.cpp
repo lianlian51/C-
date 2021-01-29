@@ -1,4 +1,6 @@
 #pragma once 
+#include <iostream>
+using namespace std;
 
 template<class T>
 struct AVLTreeNode
@@ -103,7 +105,41 @@ public:
 		return true;
 	}
 
+	void InOrder()
+	{
+		InOrder(_root);
+		cout << endl;
+	}
+
+	bool IsBalanceTree()
+	{
+		return _IsBalanceTree(_root);
+	}
+
+
 private:
+	void InOrder(Node* root)
+	{
+		if (root)
+		{
+			InOrder(root->left);
+			cout << root->data << " ";
+			InOrder(root->right);
+		}
+	}
+
+	void Destory(Node* & root)
+	{
+		if (root)
+		{
+			Destory(root->left);
+			Destory(root->right);
+			delete root;
+			root = nullptr;
+		}
+	}
+
+
 	void RotateLeft(Node* parent)
 	{
 		Node* SubR = parent->right;
@@ -157,16 +193,79 @@ private:
 
 	void RotateLR(Node* parent)
 	{
+		// 旋转之前必须保存subLR，因为旋转完成之后需要根据subLR之前平衡
+		// 的情况来更新新的节点的平衡因子
+		Node* subL = parent->left;
+		Node* subLR = subL->right;
+		int bf = subLR->_bf;
+
 		RotateLeft(parent->left);
 		RotateRight(parent);
-	}
+
+		if (1 == bf)
+			subL->_bf = -1;
+		else
+			parent->_bf = 1;
+}
 
 	void RotateRL(Node* parent)
 	{
+		Node* subR = parent->right;
+		Node* subRL = subR->left;
+		int bf = subRL->_bf;
+
 		RotateRight(parent->right);
 		RotateLeft(parent);
+
+		if (1 == bf)
+			parent->_bf = 1;
+		else
+			subR->_bf = 1;
+	}
+
+	int _Height(Node* root)
+	{
+		if (nullptr == root)
+			return 0;
+
+		int leftHeight = _Height(root->left);
+		int rightHeight = _Height(root->right);
+
+		return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
+	}
+
+	bool _IsBalanceTree(Node* root)
+	{
+		if (nullptr == root)
+			return true;
+
+		int leftHeight = _Height(root->left);
+		int rightHeight = _Height(root->right);
+
+		int bf = rightHeight - leftHeight;
+		if (abs(bf) > 1 || bf != root->_bf)
+		{
+			cout << root->data << "节点的平衡因子有问题" << endl;
+			return false;
+		}
+		return _IsBalanceTree(root->left) && _IsBalanceTree(root->right);
 	}
 
 private:
 	Node* _root;
 };
+
+void TestAVLTree()
+{
+	int array[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16, 14 };
+
+	AVLTree<int> t;
+	for (auto e : array)
+		t.Insert(e);
+
+	t.InOrder();
+	if (t.IsBalanceTree())
+		cout << "t is a AVL tree!" << endl;
+	else
+		cout << "t is not a AVL tree！" << endl;
+}
