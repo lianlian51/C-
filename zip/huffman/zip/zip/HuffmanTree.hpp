@@ -6,14 +6,17 @@
 template<class W>
 struct HuffmanTreeNode
 {
+	// 孩子双亲表示法
 	HuffmanTreeNode(const W& weight = W())
 	: _left(nullptr)
 	, _right(nullptr)
+	, _parent(nullptr)
 	, _weight(weight)
 	{}
 
 	HuffmanTreeNode<W>* _left;
 	HuffmanTreeNode<W>* _right;
+	HuffmanTreeNode<W>* _parent;
 	W _weight;
 };
 
@@ -61,10 +64,17 @@ public:
 			parent->_left = left;
 			parent->_right = right;
 
+			left->_parent = parent;
+			right->_parent = parent;
 			q.push(parent);
 		}
 		
 		_root = q.top();
+		return _root;
+	}
+
+	Node* GetRoot()
+	{
 		return _root;
 	}
 
@@ -73,7 +83,7 @@ private:
 	{
 		if (root)
 		{
-			DestoryTree(root->left);
+			DestoryTree(root->_left);
 			DestoryTree(root->_right);
 			delete root;
 			root = nullptr;
@@ -83,11 +93,3 @@ private:
 private:
 	Node* _root;
 };
-
-
-void TestHuffman()
-{
-	std::vector<int> v = { 3, 1, 5, 9 };
-	HuffmanTree<int> ht;
-	ht.CreateHuffmanTree(v);
-}
