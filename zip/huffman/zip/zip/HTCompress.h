@@ -5,10 +5,11 @@
 #include<vector>
 
 typedef unsigned long long ulg;
+typedef unsigned char uch;
 
 struct CharInfo
 {
-	char _ch;
+	uch _ch;
 	ulg _appearCount; // 字符出现的次数
 	std::string _strCode; // 字符对应的编码
 
@@ -24,6 +25,11 @@ struct CharInfo
 	bool operator>(const CharInfo& c) const 
 	{
 		return _appearCount > c._appearCount;
+	}
+
+	bool operator==(const CharInfo& c)
+	{
+		return _appearCount == c._appearCount;
 	}
 };
 

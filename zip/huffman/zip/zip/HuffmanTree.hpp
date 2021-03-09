@@ -44,11 +44,13 @@ public:
 		DestoryTree(_root);
 	}
 
-	Node* CreateHuffmanTree(const std::vector<W>& weights)
+	Node* CreateHuffmanTree(const std::vector<W>& weights, const W& invalid)
 	{
 		std::priority_queue<Node*, std::vector<Node*>, Compare> q;
 		for (auto e : weights)
 		{
+			if (e == invalid)
+				continue;
 			q.push(new Node(e));
 		}
 
