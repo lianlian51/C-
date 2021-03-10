@@ -41,8 +41,11 @@ public:
 	void CompressFile(const std::string& filePath);
 	void UNCompressFile(const std::string& filePath);
 
+	void WriteHeadInfo(FILE* fOut, const std::string& filePath);
+
 private:
 	void GeneteCode(HuffmanTreeNode<CharInfo>* root);
+	void GetLine(FILE* fIn, std::string &s);
 private:
 	std::vector<CharInfo> _charInfo;
 };
