@@ -141,6 +141,53 @@ void MergeSort(int* nums, int size)
 	//free(temp);
 }
 
+// 快速排序
+void Swap(int *left, int* right)
+{
+	int temp = *left;
+	*left = *right;
+	*right = temp;
+}
+
+
+int Partion1(int* array, int left, int right)
+{
+	int begin = left;
+	int end = right - 1;
+	//设置基准值，取数组最右侧的元素
+	int key = array[end];
+
+	while (begin < end)
+	{
+		//寻找大于基准值的数
+		while (begin < end && array[begin] <= key)
+			begin++;
+
+		while (begin < end && array[end] >= key)
+			end--;
+
+		if (begin < end)
+			Swap(&array[begin], &array[end]);
+	}
+
+	//这里将基准值和begin（end）交换
+	if (begin != right - 1)
+		Swap(&array[begin], &array[right - 1]);
+
+	return begin;//此时应该返回begin，key只是值（这里是下标操作）
+}
+
+void QuickSort(int* array, int left, int right)
+{
+	//right-left>1说明中间必有元素
+	if (right - left > 1)
+	{
+		int div = Partion1(array, left, right);
+		QuickSort(array, left, div);
+		QuickSort(array, div + 1, right);
+	}
+}
+
 
 // 堆排序
 void Adjust(vector<int> & nums, int len, int index)
@@ -252,6 +299,8 @@ int maxbit(int data[], int n)
 	return d;
 }
 
+/*
+// 基数排序
 void radixsort(int data[], int n) //基数排序
 {
 	int d = maxbit(data, n);
@@ -281,7 +330,7 @@ void radixsort(int data[], int n) //基数排序
 		radix = radix * 10;
 	}
 }
-
+*/
 
 
 
@@ -326,6 +375,13 @@ void TestSort()
 	//	cout << nums2[i] << " ";
 	//cout << endl;
 
+
+	cout << "快速排序：";
+	QuickSort(nums2, 0, sizeof(nums2) / sizeof(nums2[0]));
+	for (int i = 0; i < sizeof(nums2) / sizeof(nums2[0]); ++i)
+		cout << nums2[i] << " ";
+	cout << endl;
+
 	/*cout << "堆排序：";
 	HeapSort(nums);
 	for (auto e : nums)
@@ -338,11 +394,11 @@ void TestSort()
 	//	cout << nums2[i] << " ";
 	//cout << endl;
 
-	cout << "桶排序：";
-	bucketSort(nums2, sizeof(nums2) / sizeof(nums2[0]));
-	for (int i = 0; i < sizeof(nums2) / sizeof(nums2[0]); ++i)
-		cout << nums2[i] << " ";
-	cout << endl;
+	//cout << "桶排序：";
+	//bucketSort(nums2, sizeof(nums2) / sizeof(nums2[0]));
+	//for (int i = 0; i < sizeof(nums2) / sizeof(nums2[0]); ++i)
+	//	cout << nums2[i] << " ";
+	//cout << endl;
 }
 
 int main()
