@@ -59,9 +59,21 @@ void QuickSort(int* array, int left, int right)
 }
 
 // ≤Â»Î≈≈–Ú
-void Insert(vector<int>& nums)
+void InsertSort(vector<int>& nums)
 {
-	for (int i = 1; i < nums.size(); ++i);
+	int i;
+	int len = nums.size();
+	for (i = 1; i < len; i++);
+	{
+		int key = nums[i];
+		int index = i - 1;
+		while (index >= 0 && key < nums[index])
+		{
+			nums[index + 1] = nums[index];
+			index--;
+		}
+		nums[index + 1] = key;
+	}
 }
 
 
@@ -69,7 +81,7 @@ void Insert(vector<int>& nums)
 
 void TestSort()
 {
-	std::vector<int> nums{ 7, 9, 3, 2, 5, 6, 1, 4, 8 };
+	vector<int> nums{ 7, 9, 3, 2, 5, 6, 1, 4, 8 };
 	
 
 	//cout << "√∞≈›≈≈–Ú" << endl;
@@ -88,7 +100,11 @@ void TestSort()
 	//	cout << array[i] << " ";
 	//cout << endl;
 
-
+	cout << "≤Â»Î≈≈–Ú" << endl;
+	InsertSort(nums);
+	for (auto e : nums)
+		cout << e << " ";
+	cout << endl;
 }
 
 
