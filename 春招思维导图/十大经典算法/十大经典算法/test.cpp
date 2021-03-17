@@ -351,11 +351,11 @@ void TestSort()
 	//	cout << e << " ";
 	//cout << endl;
 
-	//cout << "Ñ¡ÔñÅÅÐò£º";
-	//SelectSort(nums);
-	//for (auto e : nums)
-	//	cout << e << " ";
-	//cout << endl;
+	cout << "Ñ¡ÔñÅÅÐò£º";
+	SelectSort(nums);
+	for (auto e : nums)
+		cout << e << " ";
+	cout << endl;
 
 	//cout << "²åÈëÅÅÐò£º";
 	//InsertSort(nums);
@@ -374,13 +374,6 @@ void TestSort()
 	//for (int i = 0; i < sizeof(nums2) / sizeof(nums2[0]); ++i)
 	//	cout << nums2[i] << " ";
 	//cout << endl;
-
-
-	cout << "¿ìËÙÅÅÐò£º";
-	QuickSort(nums2, 0, sizeof(nums2) / sizeof(nums2[0]));
-	for (int i = 0; i < sizeof(nums2) / sizeof(nums2[0]); ++i)
-		cout << nums2[i] << " ";
-	cout << endl;
 
 	/*cout << "¶ÑÅÅÐò£º";
 	HeapSort(nums);
