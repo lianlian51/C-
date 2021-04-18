@@ -109,53 +109,271 @@
 //}
 
 
+//#include <iostream>
+//using namespace std;
+//#include <string>
+//#include <map>
+//#include <algorithm>
+//#include <vector>
+//
+//int main()
+//{
+//	string s;
+//	map<int, int> madd({ { 1, 100 }, { 2, 200 }, { 3, 360 }, { 4, 220 } });
+//	map<int, int> msub({ { 1, 120 }, { 2, 350 }, { 3, 200 }, { 4, 320 } });
+//	while (cin >> s){
+//		int l = s.size();
+//		int left = 0;
+//		int right = l - 1;
+//		int ret = 0;
+//		while (left < right){
+//			if (s[left] == s[right]){
+//				++left, --right;
+//			}
+//			else{
+//				int sl = s[left] - '0';
+//				int sr = s[right] - '0';
+//				if (sl == 3){
+//					ret += msub[sl];
+//					++left;
+//					continue;
+//				}
+//				else if (sr == 3){
+//					ret += msub[sr];
+//					--right;
+//					continue;
+//				}
+//				if (madd[sl] < madd[sr]){
+//					ret += madd[sl];
+//					++left;
+//					continue;
+//				}
+//				else if (madd[sl] > madd[sr]){
+//					ret += madd[sr];
+//					--right;
+//					continue;
+//				}
+//			}
+//		}
+//		cout << ret << endl;
+//	}
+//	return 0;
+//}
+
+
+//#include <iostream>
+//using namespace std;
+//#include <vector>
+//#include <algorithm>
+//
+//int find(vector<int> v, int m)
+//{
+//	int l = v.size();
+//	for (int i = 0; i < l; ++i){
+//		if (m == v[i])
+//			return i;
+//	}
+//	return -1;
+//}
+//
+//int main()
+//{
+//	int n, m;
+//	while (cin >> n >> m)
+//	{
+//		vector<int> v(n);
+//		for (int i = 0; i < n; ++i){
+//			cin >> v[i];
+//		}
+//		int mid = find(v, m);
+//		int left = mid;
+//		int right = mid;
+//		int ret = 1;
+//		while (left >= 0 && right < n)
+//		{
+//			--left, ++right;
+//			int newleft = left;
+//			int newright = right;
+//			while (newleft >= 0 && newright < n){
+//				vector<int> tmp;
+//				for (int i = newleft; i <= newright; ++i){
+//					tmp.push_back(v[i]);
+//				}
+//				int lt = tmp.size();
+//				if (lt % 2 == 0)
+//					continue;
+//				sort(tmp.begin(), tmp.end());
+//				if (tmp[lt / 2] == m){
+//					ret++;
+//				}
+//				newleft--, newright++;
+//			}
+//		}
+//		cout << ret << endl;
+//	}
+//	return 0;
+//}
+//
+////#endif
+////
+////#include <iostream>
+////using namespace std;
+////#include <string>
+////
+////string func1(string s1, string s2, int l)
+////{
+////	for (int i = 0; i < l; ++i){
+////		if (s1[i] != s2[i])
+////			return "NO";
+////	}
+////	return "YES";
+////}
+////
+////string func2(string s1, string s2, int l)
+////{
+////	string tmp = "YES";
+////	for (int i = 1; i < l - 1; ++i){
+////		string s11 = s1.substr(0, i);
+////		string s12 = s1.substr(i);
+////		string s21 = s2.substr(0, i);
+////		string s22 = s2.substr(i);
+////		if (s11.size() == s12.size() && (s11 == s22 || s12 == s21)){
+////			tmp = "YES";
+////		}
+////
+////		if (s11 == s21 || s12 == s22)
+////			tmp = "YES";
+////	}
+////	return tmp;
+////}
+////
+////int main()
+////{
+////	int t;
+////	cin >> t;
+////	while (t--)
+////	{
+////		string s1, s2;
+////		cin >> s1 >> s2;
+////		int l = s1.size();
+////		string flag;
+////		if (l % 2 == 1){
+////			// 奇数
+////			flag = func1(s1, s2, l);
+////		}
+////		else {
+////			// 偶数
+////			 flag = func2(s1, s2, l);
+////		}
+////		cout << flag << endl;
+////	}
+////	return 0;
+////}
+//
+//#include <iostream>
+//using namespace std;
+//#include <string>
+//
+//string func1(string s1, string s2, int l)
+//{
+//	for (int i = 0; i < l; ++i){
+//		if (s1[i] != s2[i])
+//			return "NO";
+//	}
+//	return "YES";
+//}
+//
+//string func2(string s1, string s2, int l)
+//{
+//	string tmp = "NO";
+//	for (int i = 1; i < l - 1; ++i){
+//		string s11 = s1.substr(0, i);
+//		string s12 = s1.substr(i);
+//		string s21 = s2.substr(0, i);
+//		string s22 = s2.substr(i);
+//		if (s11.size() == s12.size() && (s11 == s22 && s12 == s21)){
+//			return "YES";
+//		}
+//
+//		if (s11 == s21 && s12 == s22)
+//			tmp = "YES";
+//	}
+//	return tmp;
+//}
+//
+//int main()
+//{
+//	int t;
+//	while (t--)
+//	{
+//		string s1, s2;
+//		cin >> s1 >> s2;
+//		int l = s1.size();
+//		string flag;
+//		if (l % 2 == 1){
+//			// 奇数
+//			flag = func1(s1, s2, l);
+//		}
+//		else {
+//			// 偶数
+//			flag = func2(s1, s2, l);
+//		}
+//		cout << flag << endl;
+//	}
+//	return 0;
+//}
+
+
 #include <iostream>
 using namespace std;
 #include <string>
-#include <map>
-#include <algorithm>
-#include <vector>
+
+string func1(string s1, string s2, int l)
+{
+	for (int i = 0; i < l; ++i){
+		if (s1[i] != s2[i])
+			return "NO";
+	}
+	return "YES";
+}
+
+string func2(string s1, string s2, int l)
+{
+	string tmp = "NO";
+	for (int i = 1; i < l - 1; ++i){
+		string s11 = s1.substr(0, i);
+		string s12 = s1.substr(i);
+		string s21 = s2.substr(0, i);
+		string s22 = s2.substr(i);
+		if (s11.size() == s12.size() && (s11 == s22 && s12 == s21)){
+			return "YES";
+		}
+
+		if (s11 == s21 && s12 == s22)
+			tmp = "YES";
+	}
+	return tmp;
+}
 
 int main()
 {
-	string s;
-	map<int, int> madd({ { 1, 100 }, { 2, 200 }, { 3, 360 }, { 4, 220 } });
-	map<int, int> msub({ { 1, 120 }, { 2, 350 }, { 3, 200 }, { 4, 320 } });
-	while (cin >> s){
-		int l = s.size();
-		int left = 0;
-		int right = l - 1;
-		int ret = 0;
-		while (left < right){
-			if (s[left] == s[right]){
-				++left, --right;
-			}
-			else{
-				int sl = s[left] - '0';
-				int sr = s[right] - '0';
-				if (sl == 3){
-					ret += msub[sl];
-					++left;
-					continue;
-				}
-				else if (sr == 3){
-					ret += msub[sr];
-					--right;
-					continue;
-				}
-				if (madd[sl] < madd[sr]){
-					ret += madd[sl];
-					++left;
-					continue;
-				}
-				else if (madd[sl] > madd[sr]){
-					ret += madd[sr];
-					--right;
-					continue;
-				}
-			}
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		string s1, s2;
+		cin >> s1 >> s2;
+		int l = s1.size();
+		string flag;
+		if (l % 2 == 1){
+			// 奇数
+			flag = func1(s1, s2, l);
 		}
-		cout << ret << endl;
+		else {
+			// 偶数
+			flag = func2(s1, s2, l);
+		}
+		cout << flag << endl;
 	}
 	return 0;
 }
