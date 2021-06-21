@@ -39,12 +39,14 @@ public:
 };
 void TestMap()
 {
-	std::string Fruits[] = { "苹果", "苹果", "香蕉", "香蕉", "辣条", "辣条", "橘子", "西瓜", "迷糊桃", "迷糊桃", "迷糊桃", "迷糊桃", "鸭梨", "鸭梨", "辣条", "辣条", "辣条", "苹果", "草莓" };
+	std::string Fruits[] = { "son", "son", "mom", "mom", "dad", "dad", "sister", "brother", "grandfather", "grandfather", "grandfather", "grandfather", "grandmonther", "grandmonther", "dad", "dad", "dad", "son", "grandson" };
 
+	// 使用map统计英文单词的个数
 	std::map<std::string, size_t> m;
 	for (auto& e : Fruits)
 		++m[e];
 
+	// 建立大顶堆，找到前三个个数最多的英文单词
 	std::priority_queue<std::pair<std::string, size_t>, std::vector<std::pair<std::string, size_t>>, Com> p;
 	int k = 0;
 	for (auto& e : m)
@@ -64,6 +66,13 @@ void TestMap()
 		}
 	}
 
+	while (!p.empty())
+	{
+		std::cout << p.top().first << std::endl;
+		p.pop();
+	}
+#if 0
+	// 将堆中的元素放在数组中
 	std::vector<std::string> vec;
 	while(!p.empty())
 	{
@@ -71,10 +80,13 @@ void TestMap()
 		p.pop();
 	}
 
+	// 打印出出现次数最多的单词
 	for (int i = 0; i < 3; ++i)
 	{
 		std::cout << vec[i] << std::endl;
 	}
+
+#endif
 }
 
 
